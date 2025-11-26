@@ -2,12 +2,12 @@
 
 ---
 
-## Summary / Purpose
+## Summary
 A CPU-first, OOM-resilient set of small pipelines to compute sentence-level similarity and automatic quality-estimation signals for Japanese source subtitles vs English and Spanish translations, aggregate metrics by group, visualize distributions, run paired group comparisons, and generate post-hoc plots, tables and bootstrap CIs for statistically significant contrasts. The scripts expect a prepared CSV dataset with columns including `group`, `sub_jap`, `sub_trad_en` and `sub_trad_sp` (see `1_sub_sbert_comet_pipeline.py`).
 
 ---
 
-## Files and high-level responsibilities
+## Scripts and high-level functions
 - `1_sub_sbert_comet_pipeline.py` — **Compute per-group metrics from a CSV dataset** (reads `DATASET_PATH`, computes char‑ngram cosine, punctuation jaccard, digit matching, length ratios, optional SBERT and COMET‑QE scores, batch-local min‑max normalization and a `qe_mix` weighted composite; saves per‑group CSVs and HTML reports; writes `metrics_all_groups.csv`). Defaults and behaviour are implemented in this file.
 
 - `2_make_wide_matrix.py` — **Pivot the combined `metrics_all_groups.csv` into wide format by time stamp**. It attempts to auto-detect the time column and the group column, maps desired base metric names to actual columns heuristically, and produces: `metrics_wide_by_timestamp.csv`, `metrics_wide_valid_minonepergroup.csv`, and (when possible) `metrics_wide_strict_allmetrics.csv`.
@@ -97,7 +97,7 @@ python 1_sub_sbert_comet_pipeline.py
 This creates `qe_outputs/group__{group}/metrics_group_{group}.csv` and `qe_outputs/metrics_all_groups.csv`.
 3. Pivot to wide:
 ```bash
-python 2_make_wide_matrix.py --input /path/to/qe_outputs/metrics_all_groups.csv
+python 2_make_wide_matrix.py --input .\path\to\qe_outputs\metrics_all_groups.csv
 ```
 4. Plot distributions:
 ```bash
@@ -105,11 +105,11 @@ python 3_plots_qe.py
 ```
 5. Compare groups (strict mode recommended, fallback to minone):
 ```bash
-python 4_compare_groups_qe.py --input /path/to/metrics_wide_strict_allmetrics.csv --mode strict
+python 4_compare_groups_qe.py --input .\path\to\metrics_wide_strict_allmetrics.csv --mode strict
 ```
 6. Post-hoc: recompute FDR, bootstrap and plots:
 ```bash
-python 5_qe_posthoc_pipeline.py --pairwise path/to/pairwise.csv --descriptives path/to/descriptives.csv --wide path/to/metrics_wide_strict_allmetrics.csv --do C D A B
+python 5_qe_posthoc_pipeline.py --pairwise .\path\to\pairwise.csv --descriptives .\path\to\descriptives.csv --wide .\path\to\metrics_wide_strict_allmetrics.csv --do C D A B
 ```
 
 ---
