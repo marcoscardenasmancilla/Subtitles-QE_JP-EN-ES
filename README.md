@@ -25,12 +25,12 @@ A CPU-first, OOM-resilient set of small pipelines to compute sentence-level simi
 ---
 
 ## Input data expected (script `1_sub_sbert_comet_pipeline.py`)
-- By default, `1_sub_sbert_comet_pipeline.py` reads `DATASET_PATH` (a CSV). The default in your uploaded script is a local Windows path: `DATASET_PATH = "C:/Users/Marcos/Desktop/2025-2/Tesis_Samir/dataset_final.csv"`. The script expects columns such as `group`, `sub_jap`, `sub_trad_en`, `sub_trad_sp` (see code).
+- By default, `1_sub_sbert_comet_pipeline.py` reads `DATASET_PATH` (a CSV). The default in your uploaded script is a local Windows path: `DATASET_PATH = ".\dataset_final.csv"`. The script expects columns such as `group`, `sub_jap`, `sub_trad_en`, `sub_trad_sp` (see code).
 
 ---
 
 ## Important configuration defaults (from `1_sub_sbert_comet_pipeline.py`)
-- `OUT_ROOT` default: `C:/Users/Marcos/Desktop/2025-2/Tesis_Samir/qe_outputs` (per-group outputs are written under `group__{group}` subfolders).
+- `OUT_ROOT` default: `.\qe_outputs` (per-group outputs are written under `group__{group}` subfolders).
 - SBERT: `SBERT_ENABLE = True`, model `sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2`, `SBERT_BATCH_SIZE = 64`.
 - COMET‑QE: `COMET_QE_ENABLE = True`, model `Unbabel/wmt20-comet-qe-da`, `COMET_QE_BATCH_SIZE = 8`.
 - QE_mix weights: `W_COMET = 0.6`, `W_SBERT = 0.4`.
