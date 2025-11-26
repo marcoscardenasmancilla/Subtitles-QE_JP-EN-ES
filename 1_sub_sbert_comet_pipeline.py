@@ -26,8 +26,8 @@ import warnings
 warnings.filterwarnings("ignore")
 
 # --------- CONFIG ----------
-DATASET_PATH = r"C:\Users\Marcos\Desktop\2025-2\Tesis_Samir\dataset_final.csv"   # <-- ruta LOCAL al CSV (modifica si es necesario)
-OUT_ROOT = r"C:\Users\Marcos\Desktop\2025-2\Tesis_Samir\qe_outputs"
+DATASET_PATH = ".\dataset.csv"   # <-- LOCAL path to CSV
+OUT_ROOT = ".\qe_outputs"
 CHAR_N = 3
 
 # QE_mix weights (default)
@@ -335,3 +335,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
