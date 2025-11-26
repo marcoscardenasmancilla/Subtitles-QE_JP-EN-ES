@@ -8,7 +8,7 @@ A CPU-first, OOM-resilient set of pipelines to compute sentence-level similarity
 ---
 
 ## Scripts and high-level functions
-- `1_sub_sbert_comet_pipeline.py` — **Compute per-group metrics from a CSV dataset** (reads `DATASET_PATH`, computes char‑ngram cosine, punctuation jaccard, digit matching, length ratios, optional SBERT and COMET‑QE scores, batch-local min‑max normalization and a `qe_mix` weighted composite; saves per‑group CSVs and HTML reports; writes `metrics_all_groups.csv`). Defaults and behaviour are implemented in this file.
+- `1_sub_sbert_comet_pipeline.py` — **Compute per-group metrics from a CSV ** (reads `_PATH`, computes char‑ngram cosine, punctuation jaccard, digit matching, length ratios, optional SBERT and COMET‑QE scores, batch-local min‑max normalization and a `qe_mix` weighted composite; saves per‑group CSVs and HTML reports; writes `metrics_all_groups.csv`). Defaults and behaviour are implemented in this file.
 
 - `2_make_wide_matrix.py` — **Pivot the combined `metrics_all_groups.csv` into wide format by time stamp**. It attempts to auto-detect the time column and the group column, maps desired base metric names to actual columns heuristically, and produces: `metrics_wide_by_timestamp.csv`, `metrics_wide_valid_minonepergroup.csv`, and (when possible) `metrics_wide_strict_allmetrics.csv`.
 
@@ -25,7 +25,7 @@ A CPU-first, OOM-resilient set of pipelines to compute sentence-level similarity
 ---
 
 ## Input data expected (script `1_sub_sbert_comet_pipeline.py`)
-- By default, `1_sub_sbert_comet_pipeline.py` reads `DATASET_PATH` (a CSV). The default in your uploaded script is a local Windows path: `DATASET_PATH = ".\dataset_final.csv"`. The script expects columns such as `group`, `sub_jap`, `sub_trad_en`, `sub_trad_sp` (see code).
+- By default, `1_sub_sbert_comet_pipeline.py` reads `DATASET_PATH` (a CSV). The default in your uploaded script is a local Windows path: `DATASET_PATH = ".\dataset.csv"`. The script expects columns such as `group`, `sub_jap`, `sub_trad_en`, `sub_trad_sp` (see code).
 
 ---
 
@@ -89,7 +89,7 @@ Each `metrics_group_{group}.csv` includes columns such as:
 ---
 
 ## Quick start (minimal)
-1. Prepare `dataset_final.csv` with the columns used by `1_sub_sbert_comet_pipeline.py` (at least `group`, `sub_jap`, and one or both `sub_trad_en`/`sub_trad_sp`).
+1. Prepare `dataset.csv` with the columns used by `1_sub_sbert_comet_pipeline.py` (at least `group`, `sub_jap`, and one or both `sub_trad_en`/`sub_trad_sp`).
 2. Run per-group metric computation:
 ```bash
 python 1_sub_sbert_comet_pipeline.py
