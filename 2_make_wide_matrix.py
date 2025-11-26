@@ -3,7 +3,7 @@
 """
 make_wide_matrix.py
 Generates 'wide' matrices by time_stamp with columns <metric>__<group>
-Default output in /mnt/data/
+Default output in .\data:
  - metrics_wide_by_timestamp.csv
  - metrics_wide_valid_minonepergroup.csv
  - metrics_wide_strict_allmetrics.csv
@@ -221,3 +221,4 @@ if __name__ == "__main__":
     p.add_argument("--metrics", nargs="+", help="Lista de métricas base a pivotar (ej: sbert_jap_en comet_jap_en ...).")
     args = p.parse_args()
     main(args)
+
